@@ -22,7 +22,7 @@ const getAuthToken = () => {
 };
 
 // Base URL resolver
-const API_BASE_URL = import.meta.env?.VITE_API_BASE_URL || 'http://localhost:5000';
+const API_BASE_URL = import.meta.env?.VITE_API_BASE_URL || 'https://ztech-backend-production-7ad0.up.railway.app';
 
 const buildUrl = (endpoint) => {
   if (!endpoint) return '';

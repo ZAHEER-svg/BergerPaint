@@ -7,8 +7,8 @@ import {
   Search, Filter, ArrowUpRight, Zap, Play, Pause, Flame, UserCheck2, ArrowUpCircle
 } from 'lucide-react';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
-const API_BASE_URL = import.meta.env?.VITE_API_BASE_URL || import.meta.env?.VITE_API_URL?.replace('/api', '') || 'http://localhost:5000';
+const API_URL = import.meta.env.VITE_API_URL || 'https://ztech-backend-production-7ad0.up.railway.app/api';
+const API_BASE_URL = import.meta.env?.VITE_API_BASE_URL || import.meta.env?.VITE_API_URL?.replace('/api', '') || 'https://ztech-backend-production-7ad0.up.railway.app';
 
 const buildUrl = (endpoint) => {
   if (!endpoint) return '';

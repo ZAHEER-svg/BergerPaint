@@ -6,7 +6,8 @@ import {
   X, Eye, ArrowUpRight, Filter
 } from 'lucide-react';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+// Base URL resolver
+const API_BASE_URL = import.meta.env?.VITE_API_BASE_URL || 'https://ztech-backend-production-7ad0.up.railway.app';
 
 export default function ReportsPage({ 
   user = { id: null, name: 'Guest', email: '', role: 'Employee' },

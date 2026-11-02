@@ -6,7 +6,8 @@ import {
 import bergerLogo from '../assets/berger.png';
 
 // Use environment variable with fallback to local development server
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+// Base URL resolver
+const API_BASE_URL = import.meta.env?.VITE_API_BASE_URL || 'https://ztech-backend-production-7ad0.up.railway.app';
 
 const DEPARTMENTS = [
   'Executive Office / MD & COO',
