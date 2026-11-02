@@ -4,6 +4,10 @@ import {
   ChevronLeft, ChevronRight, Filter, Plus, Download, Info, Edit3, X, Save, RefreshCw, CheckCircle, RotateCcw, AlertTriangle, ShieldCheck, Server, Globe, Check, Activity, HardDrive, Cpu, Calendar, Wrench, AlertCircle
 } from 'lucide-react';
 
+// Base URL resolver pointing directly to live Railway backend
+const API_BASE_URL = import.meta.env?.VITE_API_BASE_URL || 'https://ztech-backend-production-7ad0.up.railway.app';
+const API_URL = `${API_BASE_URL}/api`;
+
 export default function AssetsPage({ 
   user = { name: 'John Davis', email: 'john.davis@bergerpaints.com', role: 'user' },
   isItStaff: propIsItStaff,
@@ -81,8 +85,8 @@ export default function AssetsPage({
       }).toString();
 
       const [assetsRes, issuesRes] = await Promise.all([
-        fetch(`/api/assets?${queryParams}`),
-        fetch('/api/assets/issues').catch(() => null)
+        fetch(`${API_URL}/assets?${queryParams}`),
+        fetch(`${API_URL}/assets/issues`).catch(() => null)
       ]);
 
       if (assetsRes.ok) {
@@ -213,7 +217,7 @@ export default function AssetsPage({
     };
 
     try {
-      const response = await fetch('/api/assets/self-report', {
+      const response = await fetch(`${API_URL}/assets/self-report`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -247,7 +251,7 @@ export default function AssetsPage({
     const assetId = selectedAssetForAdmin.asset_id || selectedAssetForAdmin.id;
 
     try {
-      const response = await fetch(`/api/assets/${assetId}/admin-details`, {
+      const response = await fetch(`${API_URL}/assets/${assetId}/admin-details`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(adminFormData)
@@ -274,7 +278,7 @@ export default function AssetsPage({
   // Admin action to verify and update hardware health
   const handleVerifyHardware = async (assetId, newStatus) => {
     try {
-      const res = await fetch(`/api/assets/${assetId}/health`, {
+      const res = await fetch(`${API_URL}/assets/${assetId}/health`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ hardware_status: newStatus })

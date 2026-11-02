@@ -7,6 +7,10 @@ import {
   ZoomIn, Maximize2
 } from 'lucide-react';
 
+// Base URL resolver pointing directly to live Railway backend
+const API_BASE_URL = import.meta.env?.VITE_API_BASE_URL || 'https://ztech-backend-production-7ad0.up.railway.app';
+const API_URL = `${API_BASE_URL}/api`;
+
 export default function KnowledgeBasePage({ 
   user = { id: 1, name: 'John Davis', email: 'john.davis@bergerpaints.com', role: 'admin' },
   isItStaff: propIsItStaff,
@@ -97,8 +101,8 @@ export default function KnowledgeBasePage({
     setLoading(true);
     try {
       const [catRes, artRes] = await Promise.all([
-        fetch(`/api/kb/categories?isStaff=${isItStaff}`),
-        fetch(`/api/kb/articles?isStaff=${isItStaff}`)
+        fetch(`${API_URL}/kb/categories?isStaff=${isItStaff}`),
+        fetch(`${API_URL}/kb/articles?isStaff=${isItStaff}`)
       ]);
 
       if (catRes.ok) {
@@ -234,7 +238,7 @@ export default function KnowledgeBasePage({
     };
 
     try {
-      const url = editingArticleId ? `/api/kb/articles/${editingArticleId}` : '/api/kb/articles';
+      const url = editingArticleId ? `${API_URL}/kb/articles/${editingArticleId}` : `${API_URL}/kb/articles`;
       const method = editingArticleId ? 'PUT' : 'POST';
 
       const res = await fetch(url, {
@@ -274,7 +278,7 @@ export default function KnowledgeBasePage({
 
     try {
       if (type === 'article') {
-        const res = await fetch(`/api/kb/articles/${id}`, { method: 'DELETE' });
+        const res = await fetch(`${API_URL}/kb/articles/${id}`, { method: 'DELETE' });
         if (res.ok) {
           showToast('Article deleted successfully.', 'success');
           fetchData();
@@ -282,7 +286,7 @@ export default function KnowledgeBasePage({
           showToast('Failed to delete article.', 'error');
         }
       } else if (type === 'category') {
-        const res = await fetch(`/api/kb/categories/${id}`, { method: 'DELETE' });
+        const res = await fetch(`${API_URL}/kb/categories/${id}`, { method: 'DELETE' });
 
         if (res.ok) {
           if (selectedCategory === name) {
@@ -325,7 +329,7 @@ export default function KnowledgeBasePage({
     }
 
     try {
-      const url = editingCategoryId ? `/api/kb/categories/${editingCategoryId}` : '/api/kb/categories';
+      const url = editingCategoryId ? `${API_URL}/kb/categories/${editingCategoryId}` : `${API_URL}/kb/categories`;
       const method = editingCategoryId ? 'PUT' : 'POST';
 
       const res = await fetch(url, {
@@ -363,7 +367,7 @@ export default function KnowledgeBasePage({
     );
 
     try {
-      const res = await fetch(`/api/kb/articles/${article.id}/view`, { 
+      const res = await fetch(`${API_URL}/kb/articles/${article.id}/view`, { 
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId: user.id || null, userEmail: user.email || null })

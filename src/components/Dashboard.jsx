@@ -7,7 +7,7 @@ import {
 
 // Base URL resolver
 const API_BASE_URL = import.meta.env?.VITE_API_BASE_URL || 'https://ztech-backend-production-7ad0.up.railway.app';
-
+const API_URL = `${API_BASE_URL}/api`;
 export default function Dashboard({ 
   user = { id: null, name: 'Guest', email: '', role: 'Employee' }, 
   isItStaff: propIsItStaff, 
