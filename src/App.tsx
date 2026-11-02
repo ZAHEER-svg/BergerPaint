@@ -39,7 +39,7 @@ const SESSION_TIMEOUT_MS = 10 * 60 * 1000; // 10 minutes session timeout
 const API_URL = import.meta.env.VITE_API_URL || 'https://ztech-backend-production-7ad0.up.railway.app/api';
 
 export default function App() {
-  // Initialize user state from localStorage if session is valid
+  // Initialize user state from localStorage if session is 
   const [user, setUser] = useState<User | null>(() => {
     try {
       const savedUser = localStorage.getItem('berger_user');
